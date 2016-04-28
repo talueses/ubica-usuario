@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="es">
+   <head>
+   
+      <script type="text/javascript">
+      
+         function muestraUbicacion(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            alert("Latitud : " + latitude + " Longitud: " + longitude);
+         }
+
+         function manejaError(err) {
+            if(err.code == 1) {
+               alert("Error: Denegado por el usuario.");
+            }
+            
+            else if( err.code == 2) {
+               alert("Error: Ubicación no disponible.");
+            }
+         }
+         
+         function getUbicacion(){
+
+            if(navigator.geolocation){
+               // timeout en(60 segundos)
+               var options = {timeout:60000};
+               navigator.geolocation.getCurrentPosition(muestraUbicacion, manejaError, options);
+            }
+            
+            else{
+               alert("La geolocalización en su navegador no está dispobible.");
+            }
+         }
+         
+      </script>
+      
+   </head>
+   <body>
+      
+      <form>
+         <input type="button" onclick="getUbicacion();" value="Ubicación"/>
+      </form>
+      
+   </body>
+</html>
